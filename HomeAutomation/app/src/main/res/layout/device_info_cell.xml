@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_gap">
+
+    <TextView
+        android:id="@+id/device_info_cell_textview"
+        android:textSize="@dimen/device_cell_text_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="shridhar"/>
+</RelativeLayout>

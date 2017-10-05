@@ -1,0 +1,20 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="device_cell_text_size">25dp</dimen>
+
+    <dimen name="default_gap">10dp</dimen>
+    <dimen name="textview_heights">30dp</dimen>
+
+    <!--Login Screen-->
+    <dimen name="micro_gap">5dp</dimen>
+    <dimen name="min_gap">10dp</dimen>
+    <dimen name="medium_gap">15dp</dimen>
+    <dimen name="max_gap">20dp</dimen>
+    <dimen name="edit_text_height">45dp</dimen>
+    <dimen name="edit_text_corner_radius">20dp</dimen>
+    <dimen name="corner_radius">5dp</dimen>
+    <dimen name="stroke">1dp</dimen>
+</resources>
