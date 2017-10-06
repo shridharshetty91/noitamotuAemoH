@@ -19,19 +19,20 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="New Client">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/app_name"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@string/app_name"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -49,9 +50,15 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="false"
-            app:menu="@menu/main_activity_fragment_ment"
-            />
+            app:menu="@menu/main_activity_fragment_ment">
 
+            <!--<RelativeLayout-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:background="@android:color/holo_blue_light"-->
+                <!--android:layout_gravity="center"-->
+                <!--/>-->
+        </android.support.design.widget.NavigationView>
         <ListView
             android:id="@+id/activity_main_list_view"
             android:layout_width="match_parent"
@@ -59,15 +66,5 @@
             />
 
     </android.support.v4.widget.DrawerLayout>
-
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/activity_main_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
 
 </RelativeLayout>

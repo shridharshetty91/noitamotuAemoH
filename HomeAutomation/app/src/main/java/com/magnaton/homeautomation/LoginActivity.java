@@ -60,8 +60,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mEmailView.setText("deep36ban@gmail.com");
-        mPasswordView.setText("test_Password123");
+        if (BuildConfig.DEBUG) {
+            mEmailView.setText("deep36ban@gmail.com");
+            mPasswordView.setText("test_Password123");
+        }
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -161,10 +163,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("uid", response.optString("uid"));
                     editor.apply();
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-
-                    finish();
+                    StartMainActivity();
                 }
             }
         }, new Response.ErrorListener() {
@@ -173,14 +172,19 @@ public class LoginActivity extends AppCompatActivity {
                 error.printStackTrace();
                 HelperFunctions.DismissProgressDialog();
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-
-                finish();
+                StartMainActivity();
             }
         });
 
         queue.add(request);
+    }
+
+    private  void StartMainActivity()
+    {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+
+        finish();
     }
 
     private boolean isEmailValid(String email) {

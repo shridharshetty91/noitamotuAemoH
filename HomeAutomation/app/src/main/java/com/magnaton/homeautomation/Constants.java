@@ -8,5 +8,10 @@ public class Constants {
     public static String Log_TAG = "HomeAutomation";
     public static String SharedPreferencesTag = "HomeAutomationSharedPreferences";
 
-    public static boolean DEBUG = true;
+    public enum SideMenuOptions {
+        Home,
+        Settings,
+        Profile,
+        Logout
+    }
 }

@@ -4,29 +4,27 @@ package com.magnaton.homeautomation;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -45,7 +43,6 @@ import java.util.List;
 
 import static android.net.wifi.SupplicantState.COMPLETED;
 import static com.android.volley.Request.Method.POST;
-import static com.magnaton.homeautomation.Constants.DEBUG;
 import static com.magnaton.homeautomation.Constants.Log_TAG;
 import static com.magnaton.homeautomation.Constants.SharedPreferencesTag;
 import static com.magnaton.homeautomation.WebcomUrls.GetDevicesUrl;
@@ -58,7 +55,6 @@ public class MainActivityFragment extends AppFragment {
 
     private View rootView;
 
-    private ProgressBar mProgressbar;
     private ListView mListView;
 
     private DeviceInfo deviceData = null;
@@ -72,6 +68,8 @@ public class MainActivityFragment extends AppFragment {
     }
 
 
+    static boolean test = false;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,17 +79,13 @@ public class MainActivityFragment extends AppFragment {
             rootView = inflater.inflate(R.layout.fragment_main_activity, container, false);
 
             Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-            MenuInflater menuInflater = getActivity().getMenuInflater();
-            menuInflater.inflate(R.menu.main_activity_fragment_ment, toolbar.getMenu());
-            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    Log.d(Log_TAG, "Menu clicked = " + item.getTitle());
-                    return false;
-                }
-            });
 
-            mProgressbar = (ProgressBar) rootView.findViewById(R.id.activity_main_progress);
+            ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+            if (test) {
+                toolbar.setBackgroundColor(Color.RED);
+                ((MainActivity) getActivity()).getSupportActionBar().setTitle("Second");
+            }
+
             mListView = (ListView) rootView.findViewById(R.id.activity_main_list_view);
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -117,7 +111,23 @@ public class MainActivityFragment extends AppFragment {
             toggle.syncState();
         }
 
+        setHasOptionsMenu(true);
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        if (test) {
+            menu.add("A");
+            menu.add("B");
+        }
+        else {
+            menu.add("1");
+            menu.add("2");
+        }
+
     }
 
     @Override
@@ -183,9 +193,9 @@ public class MainActivityFragment extends AppFragment {
 
     private void showProgress(boolean show) {
         if (show) {
-            mProgressbar.setVisibility(View.VISIBLE);
+            HelperFunctions.ShowProgressDialog(getContext());
         } else {
-            mProgressbar.setVisibility(View.GONE);
+            HelperFunctions.DismissProgressDialog();
         }
     }
 

@@ -2,6 +2,7 @@ package com.magnaton.homeautomation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,11 +19,25 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.activity_main, new MainActivityFragment())
                 .commit();
+
+
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                MainActivityFragment fragment = new MainActivityFragment();
+                fragment.test = true;
+                fragmentManager.beginTransaction()
+                        .replace(R.id.activity_main, new MainActivityFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+        }, 7000);
+
     }
 
     @Override

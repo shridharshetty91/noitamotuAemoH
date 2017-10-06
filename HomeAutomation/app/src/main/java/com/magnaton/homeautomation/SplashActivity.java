@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
-import android.view.Menu;
+
+import com.magnaton.homeautomation.Home.DashboardActivity;
 
 import static com.magnaton.homeautomation.Constants.SharedPreferencesTag;
 
@@ -25,14 +25,14 @@ public class SplashActivity extends Activity {
                 Intent intent;
                 SharedPreferences preferences = SplashActivity.this.getSharedPreferences(SharedPreferencesTag, Context.MODE_PRIVATE);
                 String token = preferences.getString("Token", "");
-                if (TextUtils.isEmpty(token)) {
-                    intent = new Intent(SplashActivity.this, LoginActivity.class);
-                } else {
-                    intent = new Intent(SplashActivity.this, MainActivity.class);
-                }
+//                if (TextUtils.isEmpty(token)) {
+//                    intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                } else {
+                    intent = new Intent(SplashActivity.this, DashboardActivity.class);
+//                }
                 startActivity(intent);
                 finish();
             }
-        }, 1000);
+        }, 0/*1000*/);
     }
 }

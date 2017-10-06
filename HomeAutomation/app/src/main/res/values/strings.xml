@@ -37,4 +37,13 @@
     <string name="login_email_hint">Your email</string>
     <string name="login_password_hint">Your password</string>
     <string name="forgot_password_title">Forgot Password?</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!--Side Menu Options-->
+    <string name="home_option">HOME</string>
+    <string name="setting_option">SETTINGS</string>
+    <string name="profile_option">PROFILE</string>
+    <string name="logout_option">LOGOUT</string>
 </resources>
