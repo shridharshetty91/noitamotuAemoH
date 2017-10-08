@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.magnaton.homeautomation.Home.DashboardActivity;
+import com.magnaton.homeautomation.Dashboard.DashboardActivity;
 
 import static com.magnaton.homeautomation.Constants.SharedPreferencesTag;
 

@@ -9,8 +9,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.util.List;
 
-import static android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
-
 /**
  * Created by Shridhar on 10/27/16.
  */
@@ -23,12 +21,9 @@ public class AppFragment extends Fragment {
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-//        fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.replace(containerViewId, fragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.addToBackStack(this.toString());
-//        fragmentTransaction.hide(this);
         fragmentTransaction.commit();
     }
 
@@ -42,7 +37,6 @@ public class AppFragment extends Fragment {
         List<Fragment> fragments = fragmentManager.getFragments();
         if (fragments.size() > 1) {
             Fragment fragment = fragments.get(fragments.size() - 2);
-//            transaction.attach(fragment);
         }
         fragmentManager.popBackStack();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);

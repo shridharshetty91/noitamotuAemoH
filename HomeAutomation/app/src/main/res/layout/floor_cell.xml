@@ -1,0 +1,24 @@
+<com.magnaton.homeautomation.Dashboard.FloorCell
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_white_color"
+    android:padding="@dimen/medium_gap">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/floor" />
+
+    <TextView
+        android:id="@+id/floor_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/max_gap"
+        android:layout_toEndOf="@id/imageView"
+        style="@style/FloorName"/>
+
+</com.magnaton.homeautomation.Dashboard.FloorCell>

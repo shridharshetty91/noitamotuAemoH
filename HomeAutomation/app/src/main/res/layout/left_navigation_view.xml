@@ -1,4 +1,4 @@
-<com.magnaton.homeautomation.Home.LeftNavigationView
+<com.magnaton.homeautomation.Dashboard.LeftNavigationView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -14,10 +14,15 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:background="@android:color/white" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@mipmap/app_ic_launcher"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FFFFFF"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,4 +75,4 @@
                 />
         </LinearLayout>
 
-</com.magnaton.homeautomation.Home.LeftNavigationView>
+</com.magnaton.homeautomation.Dashboard.LeftNavigationView>

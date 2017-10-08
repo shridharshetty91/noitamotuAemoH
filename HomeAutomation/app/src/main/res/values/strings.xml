@@ -46,4 +46,9 @@
     <string name="setting_option">SETTINGS</string>
     <string name="profile_option">PROFILE</string>
     <string name="logout_option">LOGOUT</string>
+
+    <!--Floor Type-->
+    <string name="floor_type_room">Room</string>
+    <string name="floor_type_garden">Garden</string>
+
 </resources>

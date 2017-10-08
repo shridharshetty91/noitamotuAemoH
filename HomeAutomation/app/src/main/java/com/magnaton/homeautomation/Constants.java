@@ -9,6 +9,7 @@ public class Constants {
     public static String SharedPreferencesTag = "HomeAutomationSharedPreferences";
 
     public enum SideMenuOptions {
+        None,
         Home,
         Settings,
         Profile,

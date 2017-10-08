@@ -37,6 +37,7 @@
 
     <style name="LoginEditText" parent="AppTextView">
         <item name="android:textSize">18dp</item>
+        <item name="android:singleLine">true</item>
         <item name="android:textAlignment">center</item>
         <item name="android:background">@drawable/rounded_edittext</item>
         <item name="android:lines">1</item>
@@ -68,4 +69,28 @@
         <item name="android:textSize">18dp</item>
         <item name="android:background">@drawable/bottom_green_border</item>
     </style>
+
+    <!--Home Fragment-->
+    <style name="WelcomeMessage" parent="AppTextView">
+        <item name="android:textColor">@color/app_white_color</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="FloorName" parent="AppTextView">
+        <item name="android:textColor">@color/app_grey1_color</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="FragmentDialogTitle" parent="AppTextView">
+        <item name="android:textColor">@color/app_grey1_color</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/app_grey3_color</item>
+        <item name="android:padding">@dimen/default_gap</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>
