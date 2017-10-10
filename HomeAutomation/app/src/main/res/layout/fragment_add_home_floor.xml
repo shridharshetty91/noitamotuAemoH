@@ -2,51 +2,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.AddHomeFloorFragment">
+    tools:context=".Home.AddHomeFloorFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/title_textview"
         style="@style/FragmentDialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Floor" />
+        android:text="Add floor plan" />
+
+    <TextView
+        android:id="@+id/floor_name_edit_text_title"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/max_gap"
+        android:layout_below="@id/title_textview"
+        android:layout_centerHorizontal="true"
+        android:text="FLOOR NAME"/>
 
     <EditText
         android:id="@+id/floor_name_edit_text"
         style="@style/LoginEditText"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_text_height"
-        android:layout_below="@id/title_textview"
+        android:layout_below="@id/floor_name_edit_text_title"
         android:layout_marginLeft="@dimen/max_gap"
         android:layout_marginRight="@dimen/max_gap"
         android:layout_marginTop="@dimen/max_gap"
-        android:hint="Enter floor name"
-        android:inputType="textCapSentences|textCapWords"
-        android:textAlignment="textStart" />
+        android:inputType="textCapSentences|textCapWords" />
 
-    <EditText
-        android:id="@+id/floor_type_edit_text"
-        style="@style/LoginEditText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_below="@id/floor_name_edit_text"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/max_gap"
         android:layout_marginRight="@dimen/max_gap"
         android:layout_marginTop="@dimen/max_gap"
-        android:drawableLeft="@mipmap/floor"
-        android:drawablePadding="@dimen/default_gap"
-        android:text="Room"
-        android:textAlignment="textStart" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/floor_name_edit_text" />
 
     <Button
         android:id="@+id/add_button"
         style="@style/SignButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_text_height"
-        android:layout_below="@id/floor_type_edit_text"
+        android:layout_below="@id/recyclerview"
         android:layout_margin="@dimen/max_gap"
         android:text="ADD"
         />
-
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.magnaton.homeautomation.Dashboard;
+package com.magnaton.homeautomation.Home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,15 +9,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.magnaton.homeautomation.AppComponents.AppFragment;
+import com.magnaton.homeautomation.Dashboard.OnDashboardActivityFragmentInteractionListener;
 import com.magnaton.homeautomation.R;
 
 import java.util.ArrayList;
-
-import layout.AddHomeFloorFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +28,7 @@ import layout.AddHomeFloorFragment;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements AddHomeFloorFragment.OnFragmentInteractionListener {
+public class HomeFragment extends AppFragment implements AddHomeFloorFragment.OnFragmentInteractionListener {
 
     private OnDashboardActivityFragmentInteractionListener mListener;
     private Toolbar mToolbar;
@@ -66,7 +67,7 @@ public class HomeFragment extends Fragment implements AddHomeFloorFragment.OnFra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         ImageView fab = (ImageView) rootView.findViewById(R.id.plus_imageview);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +86,12 @@ public class HomeFragment extends Fragment implements AddHomeFloorFragment.OnFra
 
         mListView = (ListView) rootView.findViewById(R.id.list_view);
         mListView.setAdapter(new HomeFragmentListViewAdapter());
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                addFragment(R.id.rootView, new RoomsListFragment());
+            }
+        });
         return rootView;
     }
 
@@ -99,7 +106,7 @@ public class HomeFragment extends Fragment implements AddHomeFloorFragment.OnFra
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-        menu.add("Home Page");
+//        menu.add("Home Page");
 
         mToolbar.setTitle("Home");
     }

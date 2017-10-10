@@ -1,4 +1,4 @@
-package com.magnaton.homeautomation.Dashboard;
+package com.magnaton.homeautomation.Home;
 
 import android.content.Context;
 import android.util.AttributeSet;

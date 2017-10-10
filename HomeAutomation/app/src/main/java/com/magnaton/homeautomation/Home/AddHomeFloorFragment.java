@@ -1,22 +1,20 @@
-package layout;
+package com.magnaton.homeautomation.Home;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
-import com.magnaton.homeautomation.AppComponents.Views.RUIPopupMenu;
 import com.magnaton.homeautomation.R;
 
 /**
@@ -38,7 +36,6 @@ public class AddHomeFloorFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,37 +49,6 @@ public class AddHomeFloorFragment extends DialogFragment {
 
         final EditText floorName = (EditText) rootView.findViewById(R.id.floor_name_edit_text);
 
-        final EditText floorType = (EditText) rootView.findViewById(R.id.floor_type_edit_text);
-        floorType.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if (isPopupBeingShown == false) {
-                    isPopupBeingShown = true;
-                    RUIPopupMenu popup = new RUIPopupMenu(getContext(), v);
-                    MenuInflater inflater = popup.getMenuInflater();
-                    inflater.inflate(R.menu.home_floor_types, popup.getMenu());
-
-                    popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
-                        @Override
-                        public void onDismiss(PopupMenu menu) {
-                            isPopupBeingShown = false;
-                        }
-                    });
-
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            floorType.setText(item.getTitle());
-                            floorType.setCompoundDrawablesRelative(item.getIcon(), null, null, null);
-                            return false;
-                        }
-                    });
-                    popup.show();
-                }
-                return true;
-            }
-        });
         Button addButton = (Button) rootView.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +56,7 @@ public class AddHomeFloorFragment extends DialogFragment {
                 String floor = floorName.getText().toString();
                 if (floor.length() > 0) {
                     if (mListener != null) {
-                        mListener.floorAdded(AddHomeFloorFragment.this, floor, floorType.getText().toString());
+//                        mListener.floorAdded(AddHomeFloorFragment.this, floor, floorType.getText().toString());
 
                         dismiss();
                     }
@@ -98,6 +64,11 @@ public class AddHomeFloorFragment extends DialogFragment {
             }
         });
 
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(getContext());
+        recyclerView.setAdapter(adapter);
         return rootView;
     }
 
@@ -125,4 +96,57 @@ public class AddHomeFloorFragment extends DialogFragment {
     public interface OnFragmentInteractionListener {
         void floorAdded(AddHomeFloorFragment sender, String floorName, String floorType);
     }
+
+    public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+
+        private int[] mData = new int[]{R.mipmap.floor, R.mipmap.garden, R.mipmap.corridor,
+                R.mipmap.office, R.mipmap.bedroom, R.mipmap.bathroom};
+        private LayoutInflater mInflater;
+
+        // data is passed into the constructor
+        MyRecyclerViewAdapter(Context context) {
+            this.mInflater = LayoutInflater.from(context);
+        }
+
+        // inflates the cell layout from xml when needed
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            ImageView view = new ImageView(getContext());
+            GridLayoutManager.LayoutParams params = new GridLayoutManager.LayoutParams(
+                    GridLayoutManager.LayoutParams.WRAP_CONTENT,
+                    GridLayoutManager.LayoutParams.WRAP_CONTENT
+            );
+            int margin = 10;
+            params.setMargins(margin, margin, margin, margin);
+            view.setLayoutParams(params);
+            return new ViewHolder(view);
+        }
+
+        // binds the data to the textview in each cell
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            ((ImageView)holder.itemView).setImageResource(getItem(position));
+        }
+
+        // total number of cells
+        @Override
+        public int getItemCount() {
+            return mData.length;
+        }
+
+
+        // stores and recycles views as they are scrolled off screen
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            ViewHolder(View itemView) {
+                super(itemView);
+            }
+        }
+
+        // convenience method for getting data at click position
+        int getItem(int id) {
+            return mData[id];
+        }
+    }
+
 }

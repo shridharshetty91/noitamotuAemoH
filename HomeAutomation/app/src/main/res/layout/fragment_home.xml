@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg_color"
-    tools:context="com.magnaton.homeautomation.Dashboard.HomeFragment">
+    android:id="@+id/rootView"
+    tools:context="com.magnaton.homeautomation.Home.HomeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,9 +31,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/header_view"
         android:id="@+id/list_view"
-        android:padding="@dimen/default_gap"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10dp">
+        style="@style/ListView" >
 
     </ListView>
 

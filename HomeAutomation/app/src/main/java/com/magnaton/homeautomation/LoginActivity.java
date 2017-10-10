@@ -3,6 +3,7 @@ package com.magnaton.homeautomation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -72,6 +73,11 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
+
+        GradientDrawable gradientDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM, //set a gradient direction
+                new int[] {0xFFFFFFFF}); //set the color of gradient
+        gradientDrawable.setCornerRadius(10f);
     }
 
     /**

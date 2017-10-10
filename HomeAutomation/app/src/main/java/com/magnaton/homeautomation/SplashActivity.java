@@ -33,6 +33,6 @@ public class SplashActivity extends Activity {
                 startActivity(intent);
                 finish();
             }
-        }, 0/*1000*/);
+        }, 700);
     }
 }

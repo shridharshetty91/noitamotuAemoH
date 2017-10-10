@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.magnaton.homeautomation.Constants;
+import com.magnaton.homeautomation.Home.HomeFragment;
 import com.magnaton.homeautomation.Profile.ProfileFragment;
 import com.magnaton.homeautomation.R;
 import com.magnaton.homeautomation.Settings.SettingsFragment;
