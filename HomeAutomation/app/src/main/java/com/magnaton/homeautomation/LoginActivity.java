@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.magnaton.homeautomation.AppComponents.HelperFunctions;
+import com.magnaton.homeautomation.Dashboard.DashboardActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -169,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("uid", response.optString("uid"));
                     editor.apply();
 
-                    StartMainActivity();
+                    StartDashboardActivity();
                 }
             }
         }, new Response.ErrorListener() {
@@ -178,16 +179,16 @@ public class LoginActivity extends AppCompatActivity {
                 error.printStackTrace();
                 HelperFunctions.DismissProgressDialog();
 
-                StartMainActivity();
+                StartDashboardActivity();
             }
         });
 
         queue.add(request);
     }
 
-    private  void StartMainActivity()
+    private  void StartDashboardActivity()
     {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
 
         finish();

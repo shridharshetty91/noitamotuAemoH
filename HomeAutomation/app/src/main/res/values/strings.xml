@@ -37,6 +37,7 @@
     <string name="login_email_hint">Your email</string>
     <string name="login_password_hint">Your password</string>
     <string name="forgot_password_title">Forgot Password?</string>
+    <string name="signup_password_title">Don\'t have an account? Signup.</string>
     <string name="title_activity_home">Home</string>
 
     <string name="action_settings">Settings</string>
@@ -50,5 +51,6 @@
     <!--Floor Type-->
     <string name="floor_type_room">Room</string>
     <string name="floor_type_garden">Garden</string>
+    <string name="no_floors_message_in_home">Please add your floor plan by clicking on the + icon below.</string>
 
 </resources>

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.magnaton.homeautomation.Constants;
 import com.magnaton.homeautomation.R;
 
 /**
@@ -29,8 +30,12 @@ public class AddHomeFloorFragment extends DialogFragment {
         this.mListener = mListener;
     }
 
+    private RecyclerView mRecyclerView;
+    private MyRecyclerViewAdapter mAdapter;
+
     private OnFragmentInteractionListener mListener;
     private boolean isPopupBeingShown = false;
+    private int mSelectedIndex = -1;
 
     public AddHomeFloorFragment() {
         // Required empty public constructor
@@ -55,8 +60,9 @@ public class AddHomeFloorFragment extends DialogFragment {
             public void onClick(View v) {
                 String floor = floorName.getText().toString();
                 if (floor.length() > 0) {
-                    if (mListener != null) {
-//                        mListener.floorAdded(AddHomeFloorFragment.this, floor, floorType.getText().toString());
+                    if (mListener != null && mSelectedIndex != -1) {
+                        mListener.floorAdded(AddHomeFloorFragment.this, floor,
+                                Constants.IconTypes.values()[mSelectedIndex]);
 
                         dismiss();
                     }
@@ -64,11 +70,12 @@ public class AddHomeFloorFragment extends DialogFragment {
             }
         });
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(getContext());
-        recyclerView.setAdapter(adapter);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mAdapter = new MyRecyclerViewAdapter(getContext());
+        mRecyclerView.setAdapter(mAdapter);
+
         return rootView;
     }
 
@@ -94,7 +101,7 @@ public class AddHomeFloorFragment extends DialogFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void floorAdded(AddHomeFloorFragment sender, String floorName, String floorType);
+        void floorAdded(AddHomeFloorFragment sender, String floorName, Constants.IconTypes iconType);
     }
 
     public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
@@ -116,7 +123,7 @@ public class AddHomeFloorFragment extends DialogFragment {
                     GridLayoutManager.LayoutParams.WRAP_CONTENT,
                     GridLayoutManager.LayoutParams.WRAP_CONTENT
             );
-            int margin = 10;
+            int margin = 30;
             params.setMargins(margin, margin, margin, margin);
             view.setLayoutParams(params);
             return new ViewHolder(view);
@@ -126,6 +133,11 @@ public class AddHomeFloorFragment extends DialogFragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             ((ImageView)holder.itemView).setImageResource(getItem(position));
+            if (mSelectedIndex == position) {
+                holder.itemView.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+            } else {
+                holder.itemView.setBackgroundColor(getResources().getColor(R.color.app_transperent_color));
+            }
         }
 
         // total number of cells
@@ -140,6 +152,15 @@ public class AddHomeFloorFragment extends DialogFragment {
 
             ViewHolder(View itemView) {
                 super(itemView);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mSelectedIndex = mRecyclerView.getChildAdapterPosition(v);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
             }
         }
 

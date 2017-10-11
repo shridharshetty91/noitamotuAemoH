@@ -15,4 +15,9 @@ public class Constants {
         Profile,
         Logout
     }
+
+    public enum IconTypes {
+        Floor, Garden, Corridor,
+        Office, Bedroom, Bathroom
+    }
 }

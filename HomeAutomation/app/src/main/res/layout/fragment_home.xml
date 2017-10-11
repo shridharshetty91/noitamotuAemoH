@@ -17,7 +17,7 @@
             android:src="@mipmap/home_top"
             android:scaleType="fitXY"/>
 
-        <TextView
+        <com.magnaton.homeautomation.AppComponents.Views.RUITextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -26,16 +26,24 @@
             />
     </RelativeLayout>
 
-    <ListView
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/no_items_label"
+        android:layout_margin="@dimen/mega_gap"
+        style="@style/NoItemsTextView"
+        android:textAlignment="center"
+        android:text="@string/no_floors_message_in_home" />
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUIListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header_view"
         android:id="@+id/list_view"
-        style="@style/ListView" >
+        style="@style/ListView" />
 
-    </ListView>
-
-    <ImageView
+    <com.magnaton.homeautomation.AppComponents.Views.RUIImageView
         android:id="@+id/plus_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

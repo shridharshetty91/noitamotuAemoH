@@ -13,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.magnaton.homeautomation.AppComponents.AppFragment;
+import com.magnaton.homeautomation.AppComponents.Views.RUIListView;
+import com.magnaton.homeautomation.AppComponents.Views.RUITextView;
+import com.magnaton.homeautomation.Constants;
 import com.magnaton.homeautomation.R;
 
 import java.util.ArrayList;
@@ -31,12 +33,17 @@ public class RoomsListFragment extends AppFragment implements AddHomeFloorFragme
     private OnFragmentInteractionListener mListener;
 
     private Toolbar mToolbar;
-    private ListView mListView;
-    private ArrayList<String> mFloorNames;
-    private ArrayList<String> mFloorTypes;
+    private RUIListView mListView;
+    private RoomsListFragment.ListViewAdapter mAdapter;
+    private RUITextView mNoItemsTextview;
 
-    public RoomsListFragment() {
-        // Required empty public constructor
+    private ArrayList<String> mFloorNames;
+    private ArrayList<Constants.IconTypes> mFloorTypes;
+
+    private String mTitle;
+
+    public RoomsListFragment(String title) {
+        mTitle = title;
     }
 
 
@@ -68,14 +75,18 @@ public class RoomsListFragment extends AppFragment implements AddHomeFloorFragme
             });
 
             mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+            mToolbar.setTitle(mTitle);
 
             ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
 
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-            mListView = (ListView) rootView.findViewById(R.id.list_view);
-            mListView.setAdapter(new ListViewAdapter());
+            mListView = (RUIListView) rootView.findViewById(R.id.list_view);
+            mAdapter = new ListViewAdapter();
+            mListView.setAdapter(mAdapter);
+
+            mNoItemsTextview = (RUITextView) rootView.findViewById(R.id.no_items_label);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -102,17 +113,37 @@ public class RoomsListFragment extends AppFragment implements AddHomeFloorFragme
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        dataUpdated();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    @Override
-    public void floorAdded(AddHomeFloorFragment sender, String floorName, String floorType) {
-        mFloorNames.add(floorName);
-        mFloorTypes.add(floorType);
+    private void dataUpdated() {
 
-        ((ListViewAdapter)mListView.getAdapter()).notifyDataSetChanged();
+        if (mFloorNames.size() > 0) {
+            mListView.setVisibility(View.VISIBLE);
+            mNoItemsTextview.setVisibility(View.GONE);
+        } else {
+            mListView.setVisibility(View.GONE);
+            mNoItemsTextview.setVisibility(View.VISIBLE);
+        }
+
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void floorAdded(AddHomeFloorFragment sender, String floorName, Constants.IconTypes iconType) {
+        mFloorNames.add(floorName);
+        mFloorTypes.add(iconType);
+
+        dataUpdated();
     }
 
     /**

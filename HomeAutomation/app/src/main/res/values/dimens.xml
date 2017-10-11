@@ -13,6 +13,7 @@
     <dimen name="min_gap">10dp</dimen>
     <dimen name="medium_gap">15dp</dimen>
     <dimen name="max_gap">20dp</dimen>
+    <dimen name="mega_gap">30dp</dimen>
     <dimen name="edit_text_height">45dp</dimen>
     <dimen name="edit_text_corner_radius">20dp</dimen>
     <dimen name="corner_radius">10dp</dimen>

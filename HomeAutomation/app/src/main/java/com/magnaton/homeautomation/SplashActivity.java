@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.magnaton.homeautomation.Dashboard.DashboardActivity;
 
@@ -23,13 +24,18 @@ public class SplashActivity extends Activity {
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
                 Intent intent;
-                SharedPreferences preferences = SplashActivity.this.getSharedPreferences(SharedPreferencesTag, Context.MODE_PRIVATE);
-                String token = preferences.getString("Token", "");
-//                if (TextUtils.isEmpty(token)) {
+                if (BuildConfig.DEBUG) {
 //                    intent = new Intent(SplashActivity.this, LoginActivity.class);
-//                } else {
                     intent = new Intent(SplashActivity.this, DashboardActivity.class);
-//                }
+                } else {
+                    SharedPreferences preferences = SplashActivity.this.getSharedPreferences(SharedPreferencesTag, Context.MODE_PRIVATE);
+                    String token = preferences.getString("Token", "");
+                    if (TextUtils.isEmpty(token)) {
+                        intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    } else {
+                        intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                    }
+                }
                 startActivity(intent);
                 finish();
             }

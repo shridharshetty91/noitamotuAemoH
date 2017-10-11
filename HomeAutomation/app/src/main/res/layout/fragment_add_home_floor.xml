@@ -1,54 +1,85 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/rounded_white"
     tools:context=".Home.AddHomeFloorFragment">
 
-    <TextView
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
         android:id="@+id/title_textview"
         style="@style/FragmentDialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add floor plan" />
 
-    <TextView
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
         android:id="@+id/floor_name_edit_text_title"
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/max_gap"
         android:layout_below="@id/title_textview"
         android:layout_centerHorizontal="true"
-        android:text="FLOOR NAME"/>
+        android:layout_marginTop="@dimen/medium_gap"
+        android:text="FLOOR NAME" />
 
-    <EditText
+    <com.magnaton.homeautomation.AppComponents.Views.RUIEditText
         android:id="@+id/floor_name_edit_text"
         style="@style/LoginEditText"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_text_height"
         android:layout_below="@id/floor_name_edit_text_title"
-        android:layout_marginLeft="@dimen/max_gap"
-        android:layout_marginRight="@dimen/max_gap"
-        android:layout_marginTop="@dimen/max_gap"
+        android:layout_margin="@dimen/medium_gap"
         android:inputType="textCapSentences|textCapWords" />
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+        android:id="@+id/select_icon_title"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/floor_name_edit_text"
+        android:layout_centerHorizontal="true"
+        android:text="SELECT ICON" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/max_gap"
-        android:layout_marginRight="@dimen/max_gap"
-        android:layout_marginTop="@dimen/max_gap"
+        android:layout_below="@id/select_icon_title"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/floor_name_edit_text" />
+        android:layout_margin="@dimen/medium_gap"
+        android:foregroundGravity="center" />
 
-    <Button
+    <com.magnaton.homeautomation.AppComponents.Views.RUIButton
         android:id="@+id/add_button"
         style="@style/SignButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_text_height"
         android:layout_below="@id/recyclerview"
-        android:layout_margin="@dimen/max_gap"
-        android:text="ADD"
-        />
+        android:layout_marginBottom="@dimen/medium_gap"
+        android:layout_marginLeft="@dimen/medium_gap"
+        android:layout_marginRight="@dimen/medium_gap"
+        android:text="ADD" />
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/add_button"-->
+        <!--android:weightSum="2"-->
+        <!--android:showDividers="none">-->
+
+        <!--<com.magnaton.homeautomation.AppComponents.Views.RUIButton-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_marginRight="-8dp"-->
+            <!--android:textAlignment="center"-->
+            <!--android:text="Add"-->
+            <!--android:background="@android:color/transparent"/>-->
+
+        <!--<com.magnaton.homeautomation.AppComponents.Views.RUIButton-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"/>-->
+    <!--</LinearLayout>-->
 </RelativeLayout>

@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,8 +8,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/login_bg"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY"
+        android:src="@mipmap/login_bg"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,71 +20,86 @@
         android:background="@drawable/rounded_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:clipChildren="true"
+        android:clipToPadding="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/login_logo"/>
-
-        <TextView
-            style="@style/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/min_gap"
-            android:text="@string/sign_in_title"/>
-
-        <TextView
-            style="@style/EditTextTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/min_gap"
-            android:text="@string/login_email_title"/>
-
-        <EditText
-            android:id="@+id/email_edit_text"
-            style="@style/LoginEditText"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_text_height"
-            android:layout_marginTop="@dimen/micro_gap"
-            android:hint="@string/login_email_hint"
-            android:inputType="textEmailAddress"/>
-
-        <TextView
-            style="@style/EditTextTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/min_gap"
-            android:text="@string/login_password_title"/>
-
-        <EditText
-            android:id="@+id/password_edit_text"
-            style="@style/LoginEditText"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_text_height"
-            android:layout_marginTop="@dimen/micro_gap"
-            android:hint="@string/login_password_hint"
-            android:inputType="textPassword"
-            android:imeActionId="@+id/login"
-            android:imeOptions="actionUnspecified"/>
-
-        <Button
-            android:id="@+id/email_sign_in_button"
-            style="@style/SignButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_text_height"
-            android:layout_marginTop="@dimen/max_gap"
-            android:text="@string/sign_in_title"
-            />
-
-        <Button
-            android:id="@+id/email_forgot_password_button"
-            style="@style/ForgotPasswordButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/min_gap"
-            android:text="@string/forgot_password_title"
-            />
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_logo"/>
+
+            <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/min_gap"
+                android:text="@string/sign_in_title"/>
+
+            <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+                style="@style/EditTextTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/min_gap"
+                android:text="@string/login_email_title"/>
+
+            <com.magnaton.homeautomation.AppComponents.Views.RUIEditText
+                android:id="@+id/email_edit_text"
+                style="@style/LoginEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:layout_marginTop="@dimen/micro_gap"
+                android:hint="@string/login_email_hint"
+                android:inputType="textEmailAddress"/>
+
+            <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+                style="@style/EditTextTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/min_gap"
+                android:text="@string/login_password_title"/>
+
+            <com.magnaton.homeautomation.AppComponents.Views.RUIEditText
+                android:id="@+id/password_edit_text"
+                style="@style/LoginEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:layout_marginTop="@dimen/micro_gap"
+                android:hint="@string/login_password_hint"
+                android:imeActionId="@+id/login"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"/>
+
+            <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+                android:id="@+id/email_sign_in_button"
+                style="@style/SignButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:layout_marginTop="@dimen/max_gap"
+                android:text="@string/sign_in_title"
+                />
+
+            <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+                android:id="@+id/email_forgot_password_button"
+                style="@style/ForgotPasswordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/min_gap"
+                android:text="@string/forgot_password_title"
+                />
+        </LinearLayout>
+        <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+            android:id="@+id/sign_up_button"
+            style="@style/SignUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/signup_password_title" />
     </LinearLayout>
 </RelativeLayout>

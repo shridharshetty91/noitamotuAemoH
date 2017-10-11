@@ -11,6 +11,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/app_bg_color</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -21,13 +22,14 @@
     <!--Base TextView-->
     <style name="AppTextView">
         <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="custom_font_family">SFDisplay-Regular.otf</item>
     </style>
 
     <!--Login Related Styles-->
     <style name="Title" parent="AppTextView">
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/app_black_color</item>
+        <item name="custom_font_family">SFDisplay-Regular.otf</item>
     </style>
 
     <style name="EditTextTitle" parent="AppTextView">
@@ -59,6 +61,11 @@
         <item name="android:textColor">@color/app_grey1_color</item>
     </style>
 
+    <style name="SignUpButton" parent="ForgotPasswordButton">
+        <item name="android:background">@color/app_grey3_color</item>
+        <item name="android:textColor">@color/app_black_color</item>
+    </style>
+
     <!--Side Menu Related Styles-->
     <style name="UserName" parent="AppTextView">
         <item name="android:textColor">@color/app_white_color</item>
@@ -73,8 +80,13 @@
     <!--Home Fragment-->
     <style name="WelcomeMessage" parent="AppTextView">
         <item name="android:textColor">@color/app_white_color</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="custom_font_family">SFDisplay-Bold.otf</item>
+    </style>
+
+    <style name="NoItemsTextView" parent="AppTextView">
+        <item name="android:textColor">@color/app_grey1_color</item>
+        <item name="android:textSize">17dp</item>
     </style>
 
     <style name="FloorName" parent="AppTextView">
