@@ -57,6 +57,7 @@ public class SwitchCell extends RelativeLayout {
         mSwitch = (Switch) findViewById(R.id.switch_view);
         mSeekbar = (SeekBar) findViewById(R.id.seek_bar);
 
+        
         mImageView_more.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
