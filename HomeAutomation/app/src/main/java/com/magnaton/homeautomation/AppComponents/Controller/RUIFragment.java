@@ -1,10 +1,11 @@
-package com.magnaton.homeautomation.AppComponents;
+package com.magnaton.homeautomation.AppComponents.Controller;
 
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.List;
  * Created by Shridhar on 10/27/16.
  */
 
-public class AppFragment extends Fragment {
+public abstract class RUIFragment extends Fragment {
 
-    protected void addFragment(int containerViewId, AppFragment fragment) {
+    protected abstract void InitialSetupForRootView(View rootView);
+
+    protected void addFragment(int containerViewId, RUIFragment fragment) {
 
         hideKeyboard();
 
@@ -23,7 +26,7 @@ public class AppFragment extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(containerViewId, fragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fragmentTransaction.addToBackStack(this.toString());
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

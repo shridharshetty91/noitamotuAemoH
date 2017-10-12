@@ -20,4 +20,10 @@ public class Constants {
         Floor, Garden, Corridor,
         Office, Bedroom, Bathroom
     }
+
+    public enum SwitchTypes {
+        OnOffSwitch, Slider
+    }
+
+    public static int DelayToPresentFragmentInMS = 700;
 }

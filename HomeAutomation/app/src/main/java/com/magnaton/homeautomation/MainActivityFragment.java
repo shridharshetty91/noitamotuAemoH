@@ -32,8 +32,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.magnaton.homeautomation.AppComponents.AppFragment;
-import com.magnaton.homeautomation.AppComponents.HelperFunctions;
+import com.magnaton.homeautomation.AppComponents.Controller.RUIFragment;
+import com.magnaton.homeautomation.AppComponents.Model.HelperFunctions;
 import com.magnaton.homeautomation.Model.DeviceInfo;
 
 import org.json.JSONException;
@@ -51,7 +51,7 @@ import static com.magnaton.homeautomation.WebcomUrls.GetDevicesUrl;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainActivityFragment extends AppFragment {
+public class MainActivityFragment extends RUIFragment {
 
     private View rootView;
 
@@ -294,5 +294,10 @@ public class MainActivityFragment extends AppFragment {
 
             showProgress(false);
         }
+    }
+
+    @Override
+    protected void InitialSetupForRootView(View rootView) {
+
     }
 }

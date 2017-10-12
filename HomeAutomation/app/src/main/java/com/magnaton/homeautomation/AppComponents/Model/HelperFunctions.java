@@ -1,4 +1,4 @@
-package com.magnaton.homeautomation.AppComponents;
+package com.magnaton.homeautomation.AppComponents.Model;
 
 import android.app.ProgressDialog;
 import android.content.Context;

@@ -2,6 +2,7 @@ package com.magnaton.homeautomation.Home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -13,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.magnaton.homeautomation.AppComponents.AppFragment;
+import com.magnaton.homeautomation.AppComponents.Controller.RUIFragment;
 import com.magnaton.homeautomation.AppComponents.Views.RUIListView;
 import com.magnaton.homeautomation.AppComponents.Views.RUITextView;
 import com.magnaton.homeautomation.Constants;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends AppFragment implements AddHomeFloorFragment.OnFragmentInteractionListener {
+public class HomeFragment extends RUIFragment implements AddHomeFloorFragment.OnFragmentInteractionListener {
 
     private OnDashboardActivityFragmentInteractionListener mListener;
     private Toolbar mToolbar;
@@ -73,6 +74,7 @@ public class HomeFragment extends AppFragment implements AddHomeFloorFragment.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        InitialSetupForRootView(rootView);
 
         ImageView fab = (ImageView) rootView.findViewById(R.id.plus_imageview);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,14 +97,18 @@ public class HomeFragment extends AppFragment implements AddHomeFloorFragment.On
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RoomsListFragment roomsListFragment = new RoomsListFragment(mFloorNames.get(position));
-                addFragment(R.id.rootView, roomsListFragment);
+                showRoomsListFragment(mFloorNames.get(position), false);
             }
         });
 
         mNoItemsTextview = (RUITextView) rootView.findViewById(R.id.no_items_label);
 
         return rootView;
+    }
+
+    @Override
+    protected void InitialSetupForRootView(View rootView) {
+        rootView.setClickable(true);
     }
 
     @Override
@@ -115,8 +121,6 @@ public class HomeFragment extends AppFragment implements AddHomeFloorFragment.On
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
-//        menu.add("Home Page");
 
         mToolbar.setTitle("Home");
     }
@@ -135,6 +139,21 @@ public class HomeFragment extends AppFragment implements AddHomeFloorFragment.On
         mListener = null;
     }
 
+    @Override
+    public void floorAdded(AddHomeFloorFragment sender, final String floorName, Constants.IconTypes iconType) {
+        mFloorNames.add(floorName);
+        mFloorTypes.add(iconType);
+
+        dataUpdated();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showRoomsListFragment(floorName, true);
+            }
+        }, Constants.DelayToPresentFragmentInMS);
+    }
+
     private void dataUpdated() {
 
         if (mFloorNames.size() > 0) {
@@ -148,12 +167,9 @@ public class HomeFragment extends AppFragment implements AddHomeFloorFragment.On
         mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void floorAdded(AddHomeFloorFragment sender, String floorName, Constants.IconTypes iconType) {
-        mFloorNames.add(floorName);
-        mFloorTypes.add(iconType);
-
-        dataUpdated();
+    private void showRoomsListFragment(String title, boolean createNewRoom) {
+        RoomsListFragment roomsListFragment = new RoomsListFragment(title, createNewRoom);
+        addFragment(R.id.rootView, roomsListFragment);
     }
 
     private class HomeFragmentListViewAdapter extends BaseAdapter {

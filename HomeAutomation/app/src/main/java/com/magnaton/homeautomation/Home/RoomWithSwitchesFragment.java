@@ -1,8 +1,8 @@
 package com.magnaton.homeautomation.Home;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -27,31 +27,26 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RoomsListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
  */
-public class RoomsListFragment extends RUIFragment implements AddHomeFloorFragment.OnFragmentInteractionListener {
-
-    private OnFragmentInteractionListener mListener;
+public class RoomWithSwitchesFragment extends RUIFragment {
 
     private Toolbar mToolbar;
     private RUIListView mListView;
-    private RoomsListFragment.ListViewAdapter mAdapter;
+    private RoomWithSwitchesFragment.ListViewAdapter mAdapter;
     private RUITextView mNoItemsTextview;
 
     private ArrayList<String> mFloorNames;
-    private ArrayList<Constants.IconTypes> mFloorTypes;
+    private ArrayList<Constants.SwitchTypes> mSwitchTypes;
 
     private String mTitle;
     private boolean mCreateNew;
 
-    public RoomsListFragment() {
+    public RoomWithSwitchesFragment() {
 
     }
 
     @SuppressLint("ValidFragment")
-    public RoomsListFragment(String title, boolean createNew) {
+    public RoomWithSwitchesFragment(String title, boolean createNew) {
         super();
         mTitle = title;
         mCreateNew = createNew;
@@ -64,14 +59,21 @@ public class RoomsListFragment extends RUIFragment implements AddHomeFloorFragme
         setHasOptionsMenu(true);
 
         mFloorNames = new ArrayList<>();
-        mFloorTypes = new ArrayList<>();
+        mFloorNames.add("Tube light 1 ");
+        mFloorNames.add("Fan 1");
+        mFloorNames.add("Tube light 2");
+
+        mSwitchTypes = new ArrayList<>();
+        mSwitchTypes.add(Constants.SwitchTypes.OnOffSwitch);
+        mSwitchTypes.add(Constants.SwitchTypes.Slider);
+        mSwitchTypes.add(Constants.SwitchTypes.OnOffSwitch);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_rooms_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_room_with_switches, container, false);
         InitialSetupForRootView(rootView);
 
         try {
@@ -92,12 +94,12 @@ public class RoomsListFragment extends RUIFragment implements AddHomeFloorFragme
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
             mListView = (RUIListView) rootView.findViewById(R.id.list_view);
-            mAdapter = new ListViewAdapter();
+            mAdapter = new RoomWithSwitchesFragment.ListViewAdapter();
             mListView.setAdapter(mAdapter);
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    showRoomsWithSwitchesFragment(mFloorNames.get(position), false);
+
                 }
             });
             mNoItemsTextview = (RUITextView) rootView.findViewById(R.id.no_items_label);
@@ -151,22 +153,6 @@ public class RoomsListFragment extends RUIFragment implements AddHomeFloorFragme
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public void floorAdded(AddHomeFloorFragment sender, final String floorName, Constants.IconTypes iconType) {
-        mFloorNames.add(floorName);
-        mFloorTypes.add(iconType);
-
-        dataUpdated();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showRoomsWithSwitchesFragment(floorName, true);
-            }
-        }, Constants.DelayToPresentFragmentInMS);
     }
 
     private void dataUpdated() {
@@ -183,28 +169,7 @@ public class RoomsListFragment extends RUIFragment implements AddHomeFloorFragme
     }
 
     private void showAddHomeFloorFragment() {
-        AddHomeFloorFragment floorFragment = new AddHomeFloorFragment();
-        floorFragment.setListener(RoomsListFragment.this);
-        floorFragment.show(getChildFragmentManager(), null);
-    }
 
-    private void showRoomsWithSwitchesFragment(String title, boolean createNew) {
-        RoomWithSwitchesFragment roomsListFragment = new RoomWithSwitchesFragment(title, createNew);
-        addFragment(R.id.rootView, roomsListFragment);
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 
     /*
@@ -230,12 +195,12 @@ public class RoomsListFragment extends RUIFragment implements AddHomeFloorFragme
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.floor_cell, parent, false);
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.switch_cell, parent, false);
             }
 
-            FloorCell floorCell = (FloorCell) convertView;
-            floorCell.setImage(mFloorTypes.get(position));
-            floorCell.setFloorName(mFloorNames.get(position));
+            SwitchCell floorCell = (SwitchCell) convertView;
+            floorCell.setTitle(mFloorNames.get(position));
+            floorCell.setSwitchType(mSwitchTypes.get(position));
 
             return convertView;
         }

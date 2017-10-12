@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:bottom="@dimen/negative_stroke"
+        android:left="@dimen/negative_stroke"
+        android:right="@dimen/stroke"
+        android:top="@dimen/stroke">
+        <shape android:shape="rectangle" >
+            <stroke android:width="@dimen/stroke" android:color="@color/app_grey2_color" />
+            <solid android:color="@color/app_transperent_color" />
+        </shape>
+    </item>
+</layer-list>

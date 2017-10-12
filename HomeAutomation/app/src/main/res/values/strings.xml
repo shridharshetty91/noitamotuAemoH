@@ -49,8 +49,10 @@
     <string name="logout_option">LOGOUT</string>
 
     <!--Floor Type-->
-    <string name="floor_type_room">Room</string>
-    <string name="floor_type_garden">Garden</string>
     <string name="no_floors_message_in_home">Please add your floor plan by clicking on the + icon below.</string>
-
+    <string name="add_button_title">ADD</string>
+    <string name="cancel_button_title">CANCEL</string>
+    <string name="switch_cell_menu_schedule">Schedule</string>
+    <string name="switch_cell_menu_edit">Edit</string>
+    <string name="switch_cell_menu_delete">Delete</string>
 </resources>

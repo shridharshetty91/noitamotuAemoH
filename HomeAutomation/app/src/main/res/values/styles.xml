@@ -78,6 +78,13 @@
     </style>
 
     <!--Home Fragment-->
+    <style name="PlusImageView">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:src">@mipmap/plus</item>
+        <item name="android:layout_margin">@dimen/default_gap</item>
+    </style>
+
     <style name="WelcomeMessage" parent="AppTextView">
         <item name="android:textColor">@color/app_white_color</item>
         <item name="android:textSize">20dp</item>
@@ -108,6 +115,18 @@
         <item name="android:padding">@dimen/default_gap</item>
         <item name="android:divider">@android:color/transparent</item>
         <item name="android:dividerHeight">@dimen/default_gap</item>
+    </style>
+
+    <style name="AddButton" parent="AppTextView">
+        <item name="android:textColor">@color/app_green_color</item>
+        <item name="android:background">@drawable/top_right_grey_border</item>
+        <item name="android:text">@string/add_button_title</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="CancelButton" parent="AddButton">
+        <item name="android:textColor">@color/app_grey1_color</item>
+        <item name="android:text">@string/cancel_button_title</item>
     </style>
 
 </resources>

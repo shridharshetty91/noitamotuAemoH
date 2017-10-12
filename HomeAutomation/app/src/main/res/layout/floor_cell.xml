@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/app_white_color"
+    android:background="@drawable/cell_bg"
     android:padding="@dimen/medium_gap">
 
-    <ImageView
+    <com.magnaton.homeautomation.AppComponents.Views.RUIImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/floor" />
 
-    <TextView
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
         android:id="@+id/floor_name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

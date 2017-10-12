@@ -50,36 +50,28 @@
         android:layout_margin="@dimen/medium_gap"
         android:foregroundGravity="center" />
 
-    <com.magnaton.homeautomation.AppComponents.Views.RUIButton
-        android:id="@+id/add_button"
-        style="@style/SignButton"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
+        android:layout_height="wrap_content"
         android:layout_below="@id/recyclerview"
-        android:layout_marginBottom="@dimen/medium_gap"
-        android:layout_marginLeft="@dimen/medium_gap"
-        android:layout_marginRight="@dimen/medium_gap"
-        android:text="ADD" />
+        android:showDividers="none"
+        android:weightSum="2">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/add_button"-->
-        <!--android:weightSum="2"-->
-        <!--android:showDividers="none">-->
+        <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+            android:id="@+id/add_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-6dp"
+            android:layout_weight="1"
+            style="@style/AddButton"/>
 
-        <!--<com.magnaton.homeautomation.AppComponents.Views.RUIButton-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_marginRight="-8dp"-->
-            <!--android:textAlignment="center"-->
-            <!--android:text="Add"-->
-            <!--android:background="@android:color/transparent"/>-->
-
-        <!--<com.magnaton.homeautomation.AppComponents.Views.RUIButton-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"/>-->
-    <!--</LinearLayout>-->
+        <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+            android:id="@+id/cancel_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-3dp"
+            android:layout_weight="1"
+            style="@style/CancelButton"
+            />
+    </LinearLayout>
 </RelativeLayout>

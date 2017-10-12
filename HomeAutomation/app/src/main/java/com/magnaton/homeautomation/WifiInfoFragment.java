@@ -19,8 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.magnaton.homeautomation.AppComponents.AppFragment;
-import com.magnaton.homeautomation.AppComponents.HelperFunctions;
+import com.magnaton.homeautomation.AppComponents.Controller.RUIFragment;
+import com.magnaton.homeautomation.AppComponents.Model.HelperFunctions;
 import com.magnaton.homeautomation.Model.DeviceInfo;
 
 import org.json.JSONObject;
@@ -33,7 +33,7 @@ import static com.magnaton.homeautomation.WebcomUrls.DeviceAddressUrl;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WifiInfoFragment extends AppFragment {
+public class WifiInfoFragment extends RUIFragment {
 
     private WifiManager wifi;
     public DeviceInfo.Device deviceInfo;
@@ -59,7 +59,7 @@ public class WifiInfoFragment extends AppFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wifi_info, container, false);
 
-        wifi=(WifiManager)getActivity().getSystemService(Context.WIFI_SERVICE);
+        wifi=(WifiManager)getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         ssid = (EditText) view.findViewById(R.id.ssid);
         password = (EditText) view.findViewById(R.id.password);
@@ -173,6 +173,11 @@ public class WifiInfoFragment extends AppFragment {
             }
         });
         queue.add(request);
+    }
+
+    @Override
+    protected void InitialSetupForRootView(View rootView) {
+
     }
 
     public static interface WifiInfoFragmentListner {

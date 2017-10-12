@@ -70,6 +70,14 @@ public class AddHomeFloorFragment extends DialogFragment {
             }
         });
 
+        Button cancelButton = (Button) rootView.findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(gridLayoutManager);
@@ -119,6 +127,8 @@ public class AddHomeFloorFragment extends DialogFragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             ImageView view = new ImageView(getContext());
+            int padding = 5;
+            view.setPadding(padding, padding, padding, padding);
             GridLayoutManager.LayoutParams params = new GridLayoutManager.LayoutParams(
                     GridLayoutManager.LayoutParams.WRAP_CONTENT,
                     GridLayoutManager.LayoutParams.WRAP_CONTENT
@@ -134,7 +144,7 @@ public class AddHomeFloorFragment extends DialogFragment {
         public void onBindViewHolder(ViewHolder holder, int position) {
             ((ImageView)holder.itemView).setImageResource(getItem(position));
             if (mSelectedIndex == position) {
-                holder.itemView.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+                holder.itemView.setBackgroundColor(getResources().getColor(R.color.app_grey2_color));
             } else {
                 holder.itemView.setBackgroundColor(getResources().getColor(R.color.app_transperent_color));
             }

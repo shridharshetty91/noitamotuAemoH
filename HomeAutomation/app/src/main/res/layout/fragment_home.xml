@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/no_items_label"
-        android:layout_margin="@dimen/mega_gap"
+        android:layout_margin="@dimen/ultra_mega_gap"
         style="@style/NoItemsTextView"
         android:textAlignment="center"
         android:text="@string/no_floors_message_in_home" />
@@ -47,10 +47,7 @@
         android:id="@+id/plus_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:src="@mipmap/plus"
-        android:layout_margin="@dimen/default_gap"/>
+        style="@style/PlusImageView" />
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

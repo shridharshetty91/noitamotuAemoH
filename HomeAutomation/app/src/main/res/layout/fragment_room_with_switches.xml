@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_bg_color"
-    tools:context="com.magnaton.homeautomation.Home.RoomsListFragment">
+    tools:context="com.magnaton.homeautomation.Home.RoomWithSwitchesFragment">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/toolbar_holder"
