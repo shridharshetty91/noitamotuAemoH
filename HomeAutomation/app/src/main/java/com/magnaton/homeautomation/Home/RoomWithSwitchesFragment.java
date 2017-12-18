@@ -102,6 +102,8 @@ public class RoomWithSwitchesFragment extends RUIFragment implements ChooseAddNe
 
                 }
             });
+            mListView.setScrollableBootomPadding(100);
+
             mNoItemsTextview = (RUITextView) rootView.findViewById(R.id.no_items_label);
         }
         catch (Exception ex) {

@@ -108,6 +108,8 @@ public class RoomsListFragment extends RUIFragment implements AddFloorFragment.O
                     showRoomsWithSwitchesFragment(mFloorData.getStage_2().get(position), false);
                 }
             });
+            mListView.setScrollableBootomPadding(100);
+
             mNoItemsTextview = (RUITextView) rootView.findViewById(R.id.no_items_label);
         }
         catch (Exception ex) {
@@ -236,6 +238,11 @@ public class RoomsListFragment extends RUIFragment implements AddFloorFragment.O
                     DashboardResponse.valueUpdated();
 
                     dataUpdated();
+
+                    if (!edit) {
+                        mListView.scrollMyListViewToBottom();
+                    }
+
                 } else {
                     Toast.makeText(getContext(), stage2Response.getMessage(), Toast.LENGTH_SHORT).show();
                 }

@@ -111,6 +111,8 @@ public class HomeFragment extends RUIFragment implements AddFloorFragment.OnFrag
             }
         });
 
+        mListView.setScrollableBootomPadding(100);
+
         mNoItemsTextview = (RUITextView) rootView.findViewById(R.id.no_items_label);
 
         TextView welcomeTextView = (TextView) rootView.findViewById(R.id.welcome_message_textview);
@@ -360,6 +362,11 @@ public class HomeFragment extends RUIFragment implements AddFloorFragment.OnFrag
                     DashboardResponse.valueUpdated();
 
                     dataUpdated();
+
+                    if (!edit) {
+                        mListView.scrollMyListViewToBottom();
+                    }
+
                 } else {
                     Toast.makeText(getContext(), stage1Response.getMessage(), Toast.LENGTH_SHORT).show();
                 }
