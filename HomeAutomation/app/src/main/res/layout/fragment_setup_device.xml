@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_white"
+    android:gravity="center_horizontal"
+    tools:context="com.magnaton.homeautomation.Home.SetupDeviceFragment">
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+        android:id="@+id/title_textview"
+        style="@style/FragmentDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/connect_to_home_wifi" />
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ssid_title"
+        android:layout_marginTop="@dimen/medium_gap"/>
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUIEditText
+        android:id="@+id/ssid_edit_text"
+        style="@style/AddDeviceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginTop="@dimen/micro_gap"
+        android:layout_marginLeft="@dimen/mega_gap"
+        android:layout_marginRight="@dimen/mega_gap"
+        android:hint="@string/ssid_hint" />
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_device_password_title"
+        android:layout_marginTop="@dimen/medium_gap"/>
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUIEditText
+        android:id="@+id/password_edit_text"
+        style="@style/AddDeviceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginTop="@dimen/micro_gap"
+        android:layout_marginLeft="@dimen/mega_gap"
+        android:layout_marginRight="@dimen/mega_gap"
+        android:hint="@string/add_device_password_hint" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_gap"
+        android:showDividers="none"
+        android:weightSum="2">
+
+        <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+            android:id="@+id/cancel_button"
+            style="@style/CancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-6dp"
+            android:layout_weight="1" />
+
+        <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+            android:id="@+id/connect_button"
+            style="@style/AddButton"
+            android:text="@string/connect_button_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-3dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>

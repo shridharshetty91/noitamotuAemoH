@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_gap"
                 style="@style/UserName"
-                android:text="Deepak"/>
+                android:text="Deepak"
+                android:id="@+id/username_textview"/>
         </LinearLayout>
 
         <LinearLayout

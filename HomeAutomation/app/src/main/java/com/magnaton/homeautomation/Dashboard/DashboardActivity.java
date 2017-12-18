@@ -1,9 +1,14 @@
 package com.magnaton.homeautomation.Dashboard;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.magnaton.homeautomation.Constants;
+import com.magnaton.homeautomation.Account.LoginActivity;
+import com.magnaton.homeautomation.AppComponents.Model.AppPreference;
+import com.magnaton.homeautomation.AppComponents.Model.Constants;
 import com.magnaton.homeautomation.Home.HomeFragment;
 import com.magnaton.homeautomation.Profile.ProfileFragment;
 import com.magnaton.homeautomation.R;
@@ -32,10 +39,18 @@ public class DashboardActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        addObservers();
+
         mLeftNavigationView = (LeftNavigationView) findViewById(R.id.left_navigation_view);
         mLeftNavigationView.delegate = this;
 
         setCurrentSelectedOption(Constants.SideMenuOptions.Home);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        removeObservers();
     }
 
     @Override
@@ -158,6 +173,24 @@ public class DashboardActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    private void addObservers() {
+        LocalBroadcastManager.getInstance(this).registerReceiver(logoutReceiver, new IntentFilter(Constants.LogoutBroadcastKey));
+    }
+
+    private BroadcastReceiver logoutReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            AppPreference.getAppPreference().setLoginData(null);
+            Intent loginIntent = new Intent(DashboardActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
+        }
+    };
+
+    private void removeObservers() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(logoutReceiver);
     }
 }
 

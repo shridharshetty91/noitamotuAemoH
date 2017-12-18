@@ -1,74 +1,70 @@
 package com.magnaton.homeautomation.Home;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.magnaton.homeautomation.Constants;
+import com.magnaton.homeautomation.AppComponents.Controller.RUIDialogFragment;
+import com.magnaton.homeautomation.AppComponents.Model.Constants;
+import com.magnaton.homeautomation.AppComponents.Views.RUIEditText;
 import com.magnaton.homeautomation.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AddHomeFloorFragment.OnFragmentInteractionListener} interface
+ * {@link AddFloorFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class AddHomeFloorFragment extends DialogFragment {
+public class AddFloorFragment extends RUIDialogFragment {
 
-    public void setListener(OnFragmentInteractionListener mListener) {
-        this.mListener = mListener;
-    }
-
+    private RUIEditText mFloorNameEditText;
     private RecyclerView mRecyclerView;
     private MyRecyclerViewAdapter mAdapter;
 
     private OnFragmentInteractionListener mListener;
     private boolean isPopupBeingShown = false;
-    private int mSelectedIndex = -1;
 
-    public AddHomeFloorFragment() {
-        // Required empty public constructor
+    private boolean mEdit;
+    private String mFloorName;
+    private int mSelectedIndex = -1;
+    private Object mUserInfo;
+
+    public AddFloorFragment() {
+    }
+
+    public AddFloorFragment(OnFragmentInteractionListener listener, String name, int iconIndex, boolean edit, Object userInfo) {
+        mListener = listener;
+        mEdit = edit;
+        mFloorName = name;
+        mSelectedIndex = iconIndex;
+        mUserInfo = userInfo;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_add_home_floor, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_add_floor, container, false);
+        setFragmentMinWidth(rootView);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels;
-        rootView.setMinimumWidth(width - 60);
-
-        final EditText floorName = (EditText) rootView.findViewById(R.id.floor_name_edit_text);
+        mFloorNameEditText = (RUIEditText) rootView.findViewById(R.id.floor_name_edit_text);
+        mFloorNameEditText.setText(mFloorName);
 
         Button addButton = (Button) rootView.findViewById(R.id.add_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String floor = floorName.getText().toString();
-                if (floor.length() > 0) {
-                    if (mListener != null && mSelectedIndex != -1) {
-                        mListener.floorAdded(AddHomeFloorFragment.this, floor,
-                                Constants.IconTypes.values()[mSelectedIndex]);
-
-                        dismiss();
-                    }
-                }
-            }
-        });
+        if (mEdit) {
+            addButton.setText(getString(R.string.update_button_title));
+        } else {
+            addButton.setText(getString(R.string.add_button_title));
+        }
+        addButton.setOnClickListener(mOnClickAddButton);
 
         Button cancelButton = (Button) rootView.findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +94,26 @@ public class AddHomeFloorFragment extends DialogFragment {
         mListener = null;
     }
 
+    private View.OnClickListener mOnClickAddButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+                String floor = mFloorNameEditText.getText().toString();
+                if (floor.length() > 0 && mSelectedIndex != -1) {
+                    mListener.floorAdded(AddFloorFragment.this, floor,
+                            Constants.IconTypes.fromInteger(mSelectedIndex + 1), mEdit, mUserInfo);
+
+                    dismiss();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.enter_floor_name), Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Toast.makeText(getContext(), getString(R.string.enter_floor_name), Toast.LENGTH_LONG).show();
+            }
+        }
+    };
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -109,7 +125,7 @@ public class AddHomeFloorFragment extends DialogFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void floorAdded(AddHomeFloorFragment sender, String floorName, Constants.IconTypes iconType);
+        void floorAdded(AddFloorFragment sender, String floorName, Constants.IconTypes iconType, boolean edit, Object userInfo);
     }
 
     public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
@@ -118,7 +134,7 @@ public class AddHomeFloorFragment extends DialogFragment {
                 R.mipmap.office, R.mipmap.bedroom, R.mipmap.bathroom};
         private LayoutInflater mInflater;
 
-        // data is passed into the constructor
+        // getData is passed into the constructor
         MyRecyclerViewAdapter(Context context) {
             this.mInflater = LayoutInflater.from(context);
         }
@@ -139,7 +155,7 @@ public class AddHomeFloorFragment extends DialogFragment {
             return new ViewHolder(view);
         }
 
-        // binds the data to the textview in each cell
+        // binds the getData to the textview in each cell
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             ((ImageView)holder.itemView).setImageResource(getItem(position));
@@ -174,7 +190,7 @@ public class AddHomeFloorFragment extends DialogFragment {
             }
         }
 
-        // convenience method for getting data at click position
+        // convenience method for getting getData at click position
         int getItem(int id) {
             return mData[id];
         }

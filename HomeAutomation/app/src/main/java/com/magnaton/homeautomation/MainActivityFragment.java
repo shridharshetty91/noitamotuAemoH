@@ -43,8 +43,8 @@ import java.util.List;
 
 import static android.net.wifi.SupplicantState.COMPLETED;
 import static com.android.volley.Request.Method.POST;
-import static com.magnaton.homeautomation.Constants.Log_TAG;
-import static com.magnaton.homeautomation.Constants.SharedPreferencesTag;
+import static com.magnaton.homeautomation.AppComponents.Model.Constants.Log_TAG;
+import static com.magnaton.homeautomation.AppComponents.Model.Constants.SharedPreferencesTag;
 import static com.magnaton.homeautomation.WebcomUrls.GetDevicesUrl;
 
 

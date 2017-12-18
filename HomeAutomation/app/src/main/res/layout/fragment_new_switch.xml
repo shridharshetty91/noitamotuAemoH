@@ -4,74 +4,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounded_white"
-    tools:context=".Home.AddHomeFloorFragment">
+    tools:context="com.magnaton.homeautomation.Home.NewSwitchFragment">
 
     <com.magnaton.homeautomation.AppComponents.Views.RUITextView
         android:id="@+id/title_textview"
         style="@style/FragmentDialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add floor plan" />
-
-    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
-        android:id="@+id/floor_name_edit_text_title"
-        style="@style/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title_textview"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/medium_gap"
-        android:text="FLOOR NAME" />
+        android:text="Edit Switch" />
 
     <com.magnaton.homeautomation.AppComponents.Views.RUIEditText
-        android:id="@+id/floor_name_edit_text"
+        android:id="@+id/switch_name_edit_text"
         style="@style/LoginEditText"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_text_height"
-        android:layout_below="@id/floor_name_edit_text_title"
+        android:layout_below="@id/title_textview"
         android:layout_margin="@dimen/medium_gap"
         android:inputType="textCapSentences|textCapWords" />
 
     <com.magnaton.homeautomation.AppComponents.Views.RUITextView
-        android:id="@+id/select_icon_title"
+        android:id="@+id/select_switch_type_title"
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/floor_name_edit_text"
+        android:layout_below="@id/switch_name_edit_text"
         android:layout_centerHorizontal="true"
-        android:text="SELECT ICON" />
+        android:text="SELECT SWITCH TYPE" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/select_icon_title"
-        android:layout_centerHorizontal="true"
+    <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+        android:id="@+id/switch_type_button"
+        style="@style/SelctSwitchTypeButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginTop="@dimen/max_gap"
+        android:text="Select Switch Type"
+        android:layout_below="@id/select_switch_type_title"
         android:layout_margin="@dimen/medium_gap"
-        android:foregroundGravity="center" />
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recyclerview"
+        android:layout_below="@id/switch_type_button"
         android:showDividers="none"
         android:weightSum="2">
 
         <com.magnaton.homeautomation.AppComponents.Views.RUIButton
-            android:id="@+id/add_button"
+            android:id="@+id/cancel_button"
+            style="@style/CancelButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="-6dp"
-            android:layout_weight="1"
-            style="@style/AddButton"/>
+            android:layout_weight="1" />
 
         <com.magnaton.homeautomation.AppComponents.Views.RUIButton
-            android:id="@+id/cancel_button"
+            android:id="@+id/add_button"
+            style="@style/AddButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="-3dp"
-            android:layout_weight="1"
-            style="@style/CancelButton"
-            />
+            android:layout_weight="1"/>
+
     </LinearLayout>
 </RelativeLayout>

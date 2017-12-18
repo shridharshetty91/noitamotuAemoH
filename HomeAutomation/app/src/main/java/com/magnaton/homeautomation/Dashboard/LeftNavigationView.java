@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.magnaton.homeautomation.Constants;
+import com.magnaton.homeautomation.AppComponents.Model.AppPreference;
+import com.magnaton.homeautomation.AppComponents.Model.Constants;
 import com.magnaton.homeautomation.R;
 
 import java.util.ArrayList;
@@ -61,6 +62,9 @@ public class LeftNavigationView extends LinearLayout {
 
     private void  setUpLeftNavigationView()
     {
+        TextView userNameTextView = (TextView) findViewById(R.id.username_textview);
+        userNameTextView.setText(AppPreference.getAppPreference().getUserFirstName());
+
         _homeTextView = (TextView) findViewById(R.id.home_textview);
         _settingTextView = (TextView) findViewById(R.id.settings_textview);
         _profileTextView = (TextView) findViewById(R.id.profile_textview);
@@ -87,6 +91,7 @@ public class LeftNavigationView extends LinearLayout {
             }
         }
     };
+
     private void UpdateOptions() {
 
         for (TextView textView : _arrayOfOptionTextViews) {

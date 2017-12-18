@@ -1,22 +1,31 @@
 package com.magnaton.homeautomation.Home;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.magnaton.homeautomation.AppComponents.Views.RUIImageView;
+import com.magnaton.homeautomation.AppComponents.Views.RUIPopupMenu;
+import com.magnaton.homeautomation.AppComponents.Views.RUITextView;
 import com.magnaton.homeautomation.R;
 
-import static com.magnaton.homeautomation.Constants.IconTypes;
+import static com.magnaton.homeautomation.AppComponents.Model.Constants.IconTypes;
 
 /**
  * TODO: document your custom view class.
  */
 public class FloorCell extends RelativeLayout {
 
-    private ImageView mImageView;
-    private TextView mFloorNameTextView;
+    private IFloorCell mListner;
+
+    private RUIImageView mImageView;
+    private RUITextView mFloorNameTextView;
+    private RUIImageView mMoreImageView;
+
+    private Object mStage_1;
 
     public FloorCell(Context context) {
         super(context);
@@ -44,9 +53,23 @@ public class FloorCell extends RelativeLayout {
         initializeFloorCell();
     }
 
+    public void setListner(IFloorCell listner) {
+        this.mListner = listner;
+    }
+
     private void initializeFloorCell() {
-        mImageView = (ImageView) findViewById(R.id.imageView);
-        mFloorNameTextView = (TextView) findViewById(R.id.floor_name_textview);
+        mImageView = (RUIImageView) findViewById(R.id.imageView);
+        mFloorNameTextView = (RUITextView) findViewById(R.id.floor_name_textview);
+        mMoreImageView = (RUIImageView) findViewById(R.id.imageView_more);
+        mMoreImageView.setOnClickListener(mOnClickMoreImage);
+    }
+
+    public Object getData() {
+        return mStage_1;
+    }
+
+    public void setData(Object data) {
+        this.mStage_1 = data;
     }
 
     public void setImage(IconTypes iconType) {
@@ -74,5 +97,37 @@ public class FloorCell extends RelativeLayout {
 
     public void setFloorName(String floorName) {
         mFloorNameTextView.setText(floorName);
+    }
+
+    private OnClickListener mOnClickMoreImage = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            RUIPopupMenu popupMenu = new RUIPopupMenu(getContext(), v);
+            popupMenu.getMenuInflater().inflate(R.menu.floor_cell_menu, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+
+                    switch (item.getItemId()) {
+                        case R.id.floor_cell_menu_edit:
+                            if (mListner != null) {
+                                mListner.floorCellEdit(FloorCell.this, mStage_1);
+                            }
+                            break;
+                        case R.id.floor_cell_menu_delete:
+                            mListner.floorCellDelete(FloorCell.this, mStage_1);
+                            break;
+                    }
+                    return true;
+                }
+            });
+
+            popupMenu.show();
+        }
+    };
+
+    public interface IFloorCell {
+        void floorCellEdit(FloorCell sender, Object data);
+        void floorCellDelete(FloorCell sender, Object data);
     }
 }

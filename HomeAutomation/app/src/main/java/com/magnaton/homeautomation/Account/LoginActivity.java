@@ -1,8 +1,6 @@
-package com.magnaton.homeautomation;
+package com.magnaton.homeautomation.Account;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,21 +16,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.magnaton.homeautomation.AppComponents.Model.HelperFunctions;
+import com.magnaton.homeautomation.BuildConfig;
+import com.magnaton.homeautomation.AppComponents.Model.Constants;
 import com.magnaton.homeautomation.Dashboard.DashboardActivity;
+import com.magnaton.homeautomation.AppComponents.Model.AppPreference;
+import com.magnaton.homeautomation.R;
+import com.magnaton.homeautomation.WebcomUrls;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import static com.android.volley.Request.Method.POST;
-import static com.magnaton.homeautomation.Constants.Log_TAG;
-import static com.magnaton.homeautomation.Constants.SharedPreferencesTag;
-import static com.magnaton.homeautomation.WebcomUrls.LoginUrl;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A login screen that offers login via email/password.
@@ -63,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         if (BuildConfig.DEBUG) {
-            mEmailView.setText("deep36ban@gmail.com");
-            mPasswordView.setText("test_Password123");
+            mEmailView.setText("shridhar.shetty91@gmail.com");
+            mPasswordView.setText("password");
         }
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -95,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -133,60 +135,71 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void sendLoginRequet(String email, String password) {
+    private void sendLoginRequet(final String email, final String password) {
         HelperFunctions.ShowProgressDialog(this);
 
+        final StringRequest request = new StringRequest(Request.Method.POST,
+                WebcomUrls.LoginUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        handleLoginSucess(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        handleLoginError(error);
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_email", email.trim());
+                params.put("user_password", password.trim());
+                return params;
+            }
+
+        };
+
         RequestQueue queue = Volley.newRequestQueue(this);
-
-        JSONObject params = new JSONObject();
-        try {
-                /*
-                * username : Deepak N
-                * Password : test_Password123
-                * email : deep36ban@gmail.com
-                * */
-            params.put("password", password);
-            params.put("email", email);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest request = new JsonObjectRequest(POST, LoginUrl, params, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(Log_TAG, response.toString());
-                HelperFunctions.DismissProgressDialog();
-
-                if (response.optString("CODE").equals("501")) {
-                    Toast.makeText(LoginActivity.this,
-                            R.string.username_password_not_match, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LoginActivity.this,
-                            "Login Success", Toast.LENGTH_SHORT).show();
-                    SharedPreferences preferences = getSharedPreferences(SharedPreferencesTag, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("Token", response.optString("Token"));
-                    editor.putString("uid", response.optString("uid"));
-                    editor.apply();
-
-                    StartDashboardActivity();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                HelperFunctions.DismissProgressDialog();
-
-                StartDashboardActivity();
-            }
-        });
-
         queue.add(request);
     }
 
-    private  void StartDashboardActivity()
+    private void handleLoginSucess(String response) {
+        try {
+
+            LoginResponse loginResponse = new Gson().fromJson(response, LoginResponse.class);
+
+            if (loginResponse != null) {
+                if (loginResponse.getStatus()) {
+                    AppPreference.getAppPreference().setLoginData(loginResponse.getData());
+
+                    StartDashboardActivity();
+                } else {
+                    Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(LoginActivity.this, Constants.ServerFailed, Toast.LENGTH_SHORT).show();
+            }
+
+            HelperFunctions.DismissProgressDialog();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleLoginError(VolleyError error) {
+        error.printStackTrace();
+        Log.d(Constants.Log_TAG, error.getMessage());
+
+        Toast.makeText(LoginActivity.this, Constants.ServerFailed, Toast.LENGTH_SHORT).show();
+        HelperFunctions.DismissProgressDialog();
+    }
+
+    private void StartDashboardActivity()
     {
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);

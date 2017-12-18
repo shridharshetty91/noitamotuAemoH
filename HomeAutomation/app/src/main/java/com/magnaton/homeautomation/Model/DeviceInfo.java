@@ -11,13 +11,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.magnaton.homeautomation.Constants.SharedPreferencesTag;
+import static com.magnaton.homeautomation.AppComponents.Model.Constants.SharedPreferencesTag;
 
 /**
  * Created by Shridhar on 12/3/16.
  */
 
 public class DeviceInfo {
+
     public JSONObject rawValue;
 
     public ArrayList<Device> devices = new ArrayList<>();
@@ -30,7 +31,7 @@ public class DeviceInfo {
             if (jsonObject == null) {
                 return;
             }
-            JSONArray array = jsonObject.optJSONArray("data");
+            JSONArray array = jsonObject.optJSONArray("getData");
             if (array == null) {
                 return;
             }

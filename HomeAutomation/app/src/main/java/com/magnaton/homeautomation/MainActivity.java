@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import static com.magnaton.homeautomation.Constants.Log_TAG;
+import static com.magnaton.homeautomation.AppComponents.Model.Constants.Log_TAG;
 
 public class MainActivity extends AppCompatActivity {
 

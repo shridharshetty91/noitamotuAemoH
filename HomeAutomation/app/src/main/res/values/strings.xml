@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HomeAutomation</string>
+    <string name="app_name">ALEC</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -51,8 +51,30 @@
     <!--Floor Type-->
     <string name="no_floors_message_in_home">Please add your floor plan by clicking on the + icon below.</string>
     <string name="add_button_title">ADD</string>
+    <string name="update_button_title">UPDATE</string>
     <string name="cancel_button_title">CANCEL</string>
     <string name="switch_cell_menu_schedule">Schedule</string>
-    <string name="switch_cell_menu_edit">Edit</string>
-    <string name="switch_cell_menu_delete">Delete</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+    <string name="add_new_switch_board_button_title">Add new switch board</string>
+    <string name="add_more_switches_button_title">Add more switches</string>
+    <string name="add_device_title">Add device</string>
+
+    <!--Add Device-->
+    <string name="device_id_title">DEVICE ID</string>
+    <string name="device_id_hint">Enter Device Id</string>
+    <string name="ssid_title">SSID</string>
+    <string name="ssid_hint">Enter ssid</string>
+    <string name="add_device_password_title">PASSWORD</string>
+    <string name="add_device_password_hint">Enter Password</string>
+    <string name="switch1_title">SWITCH 1</string>
+    <string name="switch2_title">SWITCH 2</string>
+    <string name="switch_name_hint">Enter Switch Name</string>
+    <string name="switch_type_hint">Enter Switch Type(1/2)</string>
+    <string name="add_device_button_title">Add Device</string>
+    <string name="connect_to_home_wifi">Connect To Home Wifi</string>
+    <string name="available_switchboards_title">Available Switchboards</string>
+    <string name="connect_button_title">CONNECT</string>
+    <string name="device_setup_dialog_title">CONNECT TO HOME WIFI</string>
+    <string name="enter_floor_name">ENTER FLOOR NAME</string>
 </resources>

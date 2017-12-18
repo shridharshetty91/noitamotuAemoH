@@ -5,9 +5,19 @@ package com.magnaton.homeautomation;
  */
 
 public class WebcomUrls {
-    static String LoginUrl = "http://iot.magnatoninnovations.com/login.php";
-    static String GetDevicesUrl = "http://iot.magnatoninnovations.com/devices.php";
+    public static String LoginUrl = "http://magnatoninnovations.com/webapi/login.php";
+    public static String LogoutUrl = "http://magnatoninnovations.com/webapi/logout.php";
+    public static String RegisterUrl = "http://magnatoninnovations.com/webapi/register.php";
 
+    //Dashboard
+    public static String DashboardDataUrl = "http://magnatoninnovations.com/webapi/alec/v1/get_data.php";
 
-    static String DeviceAddressUrl = "http://192.168.4.1/setting?";
+    public static String Stage1Url = "http://magnatoninnovations.com/webapi/alec/v1/stage_1.php";
+    public static String Stage2Url = "http://magnatoninnovations.com/webapi/alec/v1/stage_2.php";
+
+    public static String SetUpDevice = "http://192.168.4.1/inital-setup";
+
+    public static String GetDevicesUrl = "http://iot.magnatoninnovations.com/devices.php";
+
+    public static String DeviceAddressUrl = "http://192.168.4.1/setting?";
 }

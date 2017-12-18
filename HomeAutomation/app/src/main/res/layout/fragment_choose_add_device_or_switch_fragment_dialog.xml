@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.magnaton.homeautomation.Home.ChooseAddNewDeviceOrAddMoreSwitches">
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+        android:id="@+id/title_textview"
+        style="@style/FragmentDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_device_title" />
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+        android:id="@+id/add_device_button"
+        style="@style/SignButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginLeft="@dimen/mega_gap"
+        android:layout_marginRight="@dimen/mega_gap"
+        android:layout_marginTop="@dimen/max_gap"
+        android:text="@string/add_new_switch_board_button_title" />
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+        android:id="@+id/add_switch_button"
+        style="@style/SignButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginLeft="@dimen/mega_gap"
+        android:layout_marginRight="@dimen/mega_gap"
+        android:layout_marginTop="@dimen/max_gap"
+        android:text="@string/add_more_switches_button_title" />
+
+    <com.magnaton.homeautomation.AppComponents.Views.RUIButton
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ultra_mega_gap"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginRight="-2dp"
+        android:layout_marginBottom="-2dp"
+        style="@style/CancelButton"
+        />
+
+</LinearLayout>

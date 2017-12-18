@@ -54,6 +54,13 @@
         <item name="android:textColor">@color/app_white_color</item>
     </style>
 
+    <style name="SelctSwitchTypeButton" parent="AppTextView">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@drawable/rounded_white</item>
+        <item name="android:textColor">@color/app_grey1_color</item>
+    </style>
+
     <style name="ForgotPasswordButton" parent="AppTextView">
         <item name="android:textSize">17dp</item>
         <item name="android:textAlignment">center</item>
@@ -127,6 +134,17 @@
     <style name="CancelButton" parent="AddButton">
         <item name="android:textColor">@color/app_grey1_color</item>
         <item name="android:text">@string/cancel_button_title</item>
+    </style>
+
+
+    <style name="AddDeviceEditText" parent="LoginEditText">
+
+    </style>
+
+    <style name="AddDeviceEditTextTitle" parent="EditTextTitle">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/app_white_color</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>

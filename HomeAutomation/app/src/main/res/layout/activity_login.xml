@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.magnaton.homeautomation.LoginActivity">
+    tools:context="com.magnaton.homeautomation.Account.LoginActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -76,7 +76,6 @@
                 android:imeActionId="@+id/login"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"/>
-
             <com.magnaton.homeautomation.AppComponents.Views.RUIButton
                 android:id="@+id/email_sign_in_button"
                 style="@style/SignButton"
@@ -85,6 +84,7 @@
                 android:layout_marginTop="@dimen/max_gap"
                 android:text="@string/sign_in_title"
                 />
+
 
             <com.magnaton.homeautomation.AppComponents.Views.RUIButton
                 android:id="@+id/email_forgot_password_button"

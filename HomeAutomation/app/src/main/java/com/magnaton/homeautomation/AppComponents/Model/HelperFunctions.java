@@ -5,7 +5,14 @@ import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Shridhar on 12/28/16.
@@ -44,5 +51,51 @@ public class HelperFunctions {
         if (progress != null) {
             progress.dismiss();
         }
+    }
+
+
+    public static Map<String, String> toMap(String string) {
+        Map<String, String> map = new HashMap<String, String>();
+        try {
+            JSONObject object = new JSONObject(string);
+            Iterator<String> keysItr = object.keys();
+            while (keysItr.hasNext()) {
+                String key = keysItr.next();
+                Object value = object.get(key);
+
+                if (value instanceof JSONArray) {
+                    value = toList((JSONArray) value);
+                } else if (value instanceof JSONObject) {
+                    value = toMap(value.toString());
+                }
+                map.put(key, value.toString());
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+
+    }
+
+    public static List<Object> toList(JSONArray array) {
+        List<Object> list = new ArrayList<Object>();
+        try {
+            for(int i = 0; i < array.length(); i++) {
+                Object value = array.get(i);
+                if(value instanceof JSONArray) {
+                    value = toList((JSONArray) value);
+                }
+
+                else if(value instanceof JSONObject) {
+                    value = toMap(value.toString());
+                }
+                list.add(value);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

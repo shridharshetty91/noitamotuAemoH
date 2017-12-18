@@ -26,7 +26,7 @@ import com.magnaton.homeautomation.Model.DeviceInfo;
 import org.json.JSONObject;
 
 import static com.android.volley.Request.Method.GET;
-import static com.magnaton.homeautomation.Constants.Log_TAG;
+import static com.magnaton.homeautomation.AppComponents.Model.Constants.Log_TAG;
 import static com.magnaton.homeautomation.WebcomUrls.DeviceAddressUrl;
 
 

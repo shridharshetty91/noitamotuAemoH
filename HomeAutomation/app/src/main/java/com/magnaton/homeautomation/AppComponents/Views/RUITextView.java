@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.magnaton.homeautomation.Constants;
+import com.magnaton.homeautomation.AppComponents.Model.Constants;
 import com.magnaton.homeautomation.R;
 
 /**

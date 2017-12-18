@@ -18,9 +18,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.magnaton.homeautomation.AppComponents.Controller.RUIFragment;
+import com.magnaton.homeautomation.AppComponents.Model.Constants;
 import com.magnaton.homeautomation.AppComponents.Views.RUIListView;
 import com.magnaton.homeautomation.AppComponents.Views.RUITextView;
-import com.magnaton.homeautomation.Constants;
 import com.magnaton.homeautomation.R;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RoomWithSwitchesFragment extends RUIFragment {
+public class RoomWithSwitchesFragment extends RUIFragment implements ChooseAddNewDeviceOrAddMoreSwitches.OnFragmentInteractionListener, SwitchBoardsListFragment.OnFragmentInteractionListener {
 
     private Toolbar mToolbar;
     private RUIListView mListView;
@@ -38,7 +38,8 @@ public class RoomWithSwitchesFragment extends RUIFragment {
     private ArrayList<String> mFloorNames;
     private ArrayList<Constants.SwitchTypes> mSwitchTypes;
 
-    private String mTitle;
+    private String mParent_id;
+    private Stage_2 mStage2Response;
     private boolean mCreateNew;
 
     public RoomWithSwitchesFragment() {
@@ -46,9 +47,10 @@ public class RoomWithSwitchesFragment extends RUIFragment {
     }
 
     @SuppressLint("ValidFragment")
-    public RoomWithSwitchesFragment(String title, boolean createNew) {
+    public RoomWithSwitchesFragment(String parent_id, Stage_2 stage2Response, boolean createNew) {
         super();
-        mTitle = title;
+        mParent_id = parent_id;
+        mStage2Response = stage2Response;
         mCreateNew = createNew;
     }
 
@@ -59,14 +61,12 @@ public class RoomWithSwitchesFragment extends RUIFragment {
         setHasOptionsMenu(true);
 
         mFloorNames = new ArrayList<>();
-        mFloorNames.add("Tube light 1 ");
-        mFloorNames.add("Fan 1");
-        mFloorNames.add("Tube light 2");
+//        mFloorNames.add("Light");
+//        mFloorNames.add("Fan");
 
         mSwitchTypes = new ArrayList<>();
-        mSwitchTypes.add(Constants.SwitchTypes.OnOffSwitch);
-        mSwitchTypes.add(Constants.SwitchTypes.Slider);
-        mSwitchTypes.add(Constants.SwitchTypes.OnOffSwitch);
+//        mSwitchTypes.add(Constants.SwitchTypes.OnOffSwitch);
+//        mSwitchTypes.add(Constants.SwitchTypes.Slider);
     }
 
     @Override
@@ -81,12 +81,12 @@ public class RoomWithSwitchesFragment extends RUIFragment {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showAddHomeFloorFragment();
+                    chooseAddDeviceOrSwitch();
                 }
             });
 
             mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-            mToolbar.setTitle(mTitle);
+            mToolbar.setTitle(mStage2Response.getName());
 
             ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
 
@@ -144,15 +144,31 @@ public class RoomWithSwitchesFragment extends RUIFragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showAddHomeFloorFragment();
+                    chooseAddDeviceOrSwitch();
                 }
             }, Constants.DelayToPresentFragmentInMS);
         }
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onChooseAddDevice() {
+        SwitchBoardsListFragment switchBoardsListFragment = new SwitchBoardsListFragment(this, mParent_id, mStage2Response);
+        addFragment(R.id.rootView, switchBoardsListFragment);
+    }
+
+    @Override
+    public void onChooseAddMoreSwitch() {
+
     }
 
     private void dataUpdated() {
@@ -168,14 +184,15 @@ public class RoomWithSwitchesFragment extends RUIFragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    private void showAddHomeFloorFragment() {
-
+    private void chooseAddDeviceOrSwitch() {
+        ChooseAddNewDeviceOrAddMoreSwitches dialog = new ChooseAddNewDeviceOrAddMoreSwitches(this);
+        dialog.show(getChildFragmentManager(), null);
     }
 
     /*
     * Adapter
     * */
-    class ListViewAdapter extends BaseAdapter {
+    class ListViewAdapter extends BaseAdapter implements SwitchCell.SwitchCellListner, NewSwitchFragment.OnFragmentInteractionListener {
 
         @Override
         public int getCount() {
@@ -198,11 +215,33 @@ public class RoomWithSwitchesFragment extends RUIFragment {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.switch_cell, parent, false);
             }
 
-            SwitchCell floorCell = (SwitchCell) convertView;
-            floorCell.setTitle(mFloorNames.get(position));
-            floorCell.setSwitchType(mSwitchTypes.get(position));
+            SwitchCell switchCell = (SwitchCell) convertView;
+            switchCell.listner = this;
+            switchCell.setTitle(mFloorNames.get(position));
+            switchCell.setSwitchType(mSwitchTypes.get(position));
 
             return convertView;
+        }
+
+        private int mEditingCellIndex;
+
+        @Override
+        public void EditSwitch(SwitchCell sender, String name, Constants.SwitchTypes switchType) {
+            NewSwitchFragment newSwitchFragment = new NewSwitchFragment(name, switchType, this);
+            newSwitchFragment.show(getChildFragmentManager(), null);
+
+            mEditingCellIndex = mListView.getPositionForView(sender);
+        }
+
+        @Override
+        public void switchAdded(String name, Constants.SwitchTypes switchType) {
+            mFloorNames.remove(mEditingCellIndex);
+            mSwitchTypes.remove(mEditingCellIndex);
+
+            mFloorNames.add(mEditingCellIndex, name);
+            mSwitchTypes.add(mEditingCellIndex, switchType);
+
+            dataUpdated();
         }
     }
 }

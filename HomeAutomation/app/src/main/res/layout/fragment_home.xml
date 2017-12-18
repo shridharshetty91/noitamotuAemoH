@@ -1,54 +1,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg_color"
-    android:id="@+id/rootView"
     tools:context="com.magnaton.homeautomation.Home.HomeFragment">
 
     <RelativeLayout
+        android:id="@+id/header_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/header_view">
+        android:layout_height="wrap_content">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/home_top"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@mipmap/home_top"/>
 
         <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+            android:id="@+id/welcome_message_textview"
+            style="@style/WelcomeMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            style="@style/WelcomeMessage"
-            android:text="Welcome, Deepak"
             />
     </RelativeLayout>
 
     <com.magnaton.homeautomation.AppComponents.Views.RUITextView
+        android:id="@+id/no_items_label"
+        style="@style/NoItemsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/no_items_label"
         android:layout_margin="@dimen/ultra_mega_gap"
-        style="@style/NoItemsTextView"
-        android:textAlignment="center"
-        android:text="@string/no_floors_message_in_home" />
+        android:text="@string/no_floors_message_in_home"
+        android:textAlignment="center" />
 
     <com.magnaton.homeautomation.AppComponents.Views.RUIListView
+        android:id="@+id/list_view"
+        style="@style/ListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header_view"
-        android:id="@+id/list_view"
-        style="@style/ListView" />
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        android:scrollbarStyle="outsideOverlay"/>
 
     <com.magnaton.homeautomation.AppComponents.Views.RUIImageView
         android:id="@+id/plus_imageview"
+        style="@style/PlusImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/PlusImageView" />
+        android:layout_height="wrap_content" />
 
+    <!--Wrote at the bottom to bring front-->
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
